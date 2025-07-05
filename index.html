@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZenRoot - Ancient Wellness, Modern Refreshment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #2d5a3d 0%, #1a4d2e 50%, #0f3d1f 100%);
+            min-height: 100vh;
+            color: #a8c9a8;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(45, 90, 61, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 183, 107, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffb76b;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo::before {
+            content: "🌸";
+            margin-right: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #a8c9a8;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #ffb76b;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #ffb76b;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffb76b 0%, #ff9a7a 50%, #c99dd1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero-text h2 {
+            font-size: 1.5rem;
+            color: #ffb76b;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #a8c9a8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffb76b 0%, #ff9a7a 50%, #c99dd1 100%);
+            color: #2d5a3d;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 183, 107, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 183, 107, 0.4);
+        }
+
+        .hero-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .product-bottle {
+            width: 300px;
+            height: 400px;
+            background: linear-gradient(135deg, #ffb76b 0%, #ff9a7a 50%, #c99dd1 100%);
+            border-radius: 50px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-leaf {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: floatLeaf 6s ease-in-out infinite;
+        }
+
+        @keyframes floatLeaf {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        .floating-leaf:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .floating-leaf:nth-child(2) { top: 60%; right: 15%; animation-delay: 2s; }
+        .floating-leaf:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
+
+        /* Story Section */
+        .story {
+            padding: 6rem 0;
+            background: rgba(45, 90, 61, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .story-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: #ffb76b;
+        }
+
+        .story-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #a8c9a8;
+            margin-bottom: 3rem;
+        }
+
+        .story-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 183, 107, 0.1);
+            border: 1px solid rgba(255, 183, 107, 0.3);
+            padding: 2rem;
+            border-radius: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 183, 107, 0.2);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffb76b;
+        }
+
+        .feature-card p {
+            color: #a8c9a8;
+            line-height: 1.6;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #1a4d2e 0%, #0f3d1f 100%);
+        }
+
+        .products h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: #ffb76b;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: rgba(255, 183, 107, 0.1);
+            border: 1px solid rgba(255, 183, 107, 0.3);
+            padding: 2rem;
+            border-radius: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 183, 107, 0.2);
+        }
+
+        .product-card .product-image {
+            width: 150px;
+            height: 200px;
+            background: linear-gradient(135deg, #ffb76b 0%, #ff9a7a 50%, #c99dd1 100%);
+            border-radius: 30px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .product-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffb76b;
+        }
+
+        .product-card p {
+            color: #a8c9a8;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffb76b;
+            margin-bottom: 1rem;
+        }
+
+        .buy-button {
+            background: linear-gradient(135deg, #ffb76b 0%, #ff9a7a 50%, #c99dd1 100%);
+            color: #2d5a3d;
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .buy-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 183, 107, 0.3);
+        }
+
+        /* Social Media Section */
+        .social {
+            padding: 4rem 0;
+            background: rgba(45, 90, 61, 0.8);
+            text-align: center;
+        }
+
+        .social h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #ffb76b;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 183, 107, 0.1);
+            border: 1px solid rgba(255, 183, 107, 0.3);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            color: #a8c9a8;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 183, 107, 0.2);
+            color: #ffb76b;
+        }
+
+        .social-link .icon {
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #2d5a3d;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #a8c9a8;
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: #ffb76b;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #ffb76b;
+            padding-top: 2rem;
+            color: #a8c9a8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .product-bottle {
+                width: 250px;
+                height: 350px;
+            }
+
+            .social-links {
+                gap: 1rem;
+            }
+
+            .social-link {
+                padding: 0.8rem 1.5rem;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Sunnery</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#story">Story</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#social">Connect</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Sunnery</h1>
+                    <h2>Ancient Wellness, Modern Refreshment</h2>
+                    <p>Discover the perfect blend of probiotic power and ancient Indian wisdom. Our refreshing soda harnesses the secret benefits of rare Himalayan roots, creating a drink that nourishes your gut, calms your mind, and transports you to a tropical paradise.</p>
+                    <a href="#products" class="cta-button">Taste the Magic</a>
+                </div>
+                <div class="hero-image">
+                    <div class="product-bottle">🥤</div>
+                </div>
+            </div>
+        </div>
+        <div class="floating-elements">
+            <div class="floating-leaf">🌿</div>
+            <div class="floating-leaf">🍃</div>
+            <div class="floating-leaf">🌱</div>
+        </div>
+    </section>
+
+    <section id="story" class="story">
+        <div class="container">
+            <div class="story-content fade-in">
+                <h2>The Ancient Secret</h2>
+                <div class="story-text">
+                    <p>Deep in the misty mountains of the Himalayas, ancient healers discovered a remarkable root that has been their secret to wellness for over 2,000 years. This mystical Ashwagandha root, known as the "Indian Winter Cherry," possesses extraordinary adaptogenic properties that help the body naturally balance stress and restore harmony.</p>
+                    
+                    <p>We've carefully combined this time-honored wisdom with modern probiotic science, creating a refreshing soda that not only tastes incredible but actively supports your digestive health and mental well-being. Each bottle contains billions of beneficial bacteria alongside the concentrated essence of this sacred root.</p>
+                    
+                    <p>The result? A drink that doesn't just quench your thirst—it nourishes your soul, calms your mind, and connects you to centuries of natural healing wisdom.</p>
+                </div>
+            </div>
+            
+            <div class="story-features">
+                <div class="feature-card fade-in">
+                    <div class="icon">🌿</div>
+                    <h3>Ancient Wisdom</h3>
+                    <p>Infused with rare Himalayan Ashwagandha root, used for millennia to promote balance and vitality</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="icon">🦠</div>
+                    <h3>Probiotic Power</h3>
+                    <p>Billions of beneficial bacteria to support your gut health and boost your natural immunity</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="icon">🧘</div>
+                    <h3>Stress Relief</h3>
+                    <p>Natural adaptogens help your body manage stress and promote a sense of calm relaxation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="products">
+        <div class="container">
+            <h2 class="fade-in">Our Tropical Collection</h2>
+            <div class="product-grid">
+                <div class="product-card fade-in">
+                    <div class="product-image">🥥</div>
+                    <h3>Coconut Paradise</h3>
+                    <p>Transport yourself to a tropical beach with our creamy coconut blend, enhanced with probiotics and the wisdom of ancient roots.</p>
+                    <div class="product-price">$4.99</div>
+                    <a href="#" class="buy-button">Order Now</a>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <div class="product-image">🍍</div>
+                    <h3>Pineapple Zen</h3>
+                    <p>Sweet, tangy pineapple meets the earthy richness of Himalayan roots in this refreshing probiotic elixir.</p>
+                    <div class="product-price">$4.99</div>
+                    <a href="#" class="buy-button">Order Now</a>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <div class="product-image">🥭</div>
+                    <h3>Mango Bliss</h3>
+                    <p>Tropical mango sweetness balanced with the grounding energy of ancient Indian botanicals and live cultures.</p>
+                    <div class="product-price">$4.99</div>
+                    <a href="#" class="buy-button">Order Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="social" class="social">
+        <div class="container">
+            <h2 class="fade-in">Join Our Wellness Community</h2>
+            <div class="social-links">
+                <a href="#" class="social-link fade-in">
+                    <span class="icon">📱</span>
+                    <span>Instagram</span>
+                </a>
+                <a href="#" class="social-link fade-in">
+                    <span class="icon">🐦</span>
+                    <span>Twitter</span>
+                </a>
+                <a href="#" class="social-link fade-in">
+                    <span class="icon">📘</span>
+                    <span>Facebook</span>
+                </a>
+                <a href="#" class="social-link fade-in">
+                    <span class="icon">🎵</span>
+                    <span>TikTok</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sunnery</h3>
+                    <p>Ancient wisdom meets modern wellness. Experience the power of probiotic refreshment infused with sacred Himalayan roots.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="#story">Our Story</a></p>
+                    <p><a href="#products">Products</a></p>
+                    <p><a href="#social">Social Media</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Email: hello@sunnery.com</p>
+                    <p>Phone: (555) 123-SUN</p>
+                    <p>Follow us for daily wellness tips!</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Sunnery. All rights reserved. Crafted with ancient wisdom and modern love.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header background change on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(45, 90, 61, 0.98)';
+            } else {
+                header.style.background = 'rgba(45, 90, 61, 0.95)';
+            }
+        });
+
+        // Add some interactive elements
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
